@@ -308,6 +308,62 @@ def print_import_vars():
     print(_gl_test3)
     print(dir(module1))
 
+    
+#reserch class and object
+class call:
+    def __init__(self ,txt):
+        self.amp = txt
+
+    def __call__(self ,txt):
+        print 'im call amp:' + self.amp + txt
+        
+class call2:
+    def __call__(self ,txt):
+        print 'im call2 amp:' + self.amp + txt
+    def call2(self,txt):
+        return self(txt)
+
+a = call('ddddddd')
+a('-this is a')
+
+
+v = 'v'
+p = '-this is p'
+ 
+c = (v if v else p)
+print type(c)
+
+
+class at(call2,call): pass
+
+att = at('at')
+att('at')
+
+attcall2 = getattr(att, "call2")
+
+attcall2('-att-call2')
+
+getattr(att, "call2")('-call2')
+
+fun = att.call2
+fun('-call2-fun')
+
+fun1 = getattr(att,'call2')
+fun1('-call2-fun1')
+
+#attr-call('-attr-call')
+print dir(att)
+
+for i in dir(att):
+    var = (getattr(att,i))
+    if isinstance(var, type(att.call2)):
+        var('asdfsdf')
+    else:
+        print var
+ 
+att.call2('-att.call2')
+        
+
 if __name__ == "__main__":
     print_import_vars()
 
